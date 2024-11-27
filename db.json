@@ -1,3 +1,44 @@
 {
-  "utilisateur": []
+  "utilisateur": [
+    {
+      "id": "5927",
+      "nomUtilisateur": "Malik",
+      "email": "test@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "dd41",
+      "nomUtilisateur": "Malik",
+      "email": "test2@gmail.com",
+      "motDePasse": "Azer1234",
+      "confirmerMotDePasse": "Azer1234"
+    }
+  ],
+  "publication": [
+    {
+      "id": "3016",
+      "textePublication": "Combien d’œufs peut-on manger par jour ? La réponse d’un nutritionniste",
+      "imagePublication": "https://i.pinimg.com/736x/bd/2d/bf/bd2dbf11db25b3277cefe7936e0509c1.jpg",
+      "utilisateurId": "5927"
+    },
+    {
+      "id": "ce08",
+      "textePublication": "date réels !",
+      "imagePublication": "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/07/Raw-vs-JPEG-Photographer-at-Sunset.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-11-27T00:58:01.322Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "ccc3",
+      "textePublication": "Coucou la team moi je suis la fonction reset !",
+      "imagePublication": "https://photographylife.com/wp-content/uploads/2018/11/Moeraki-Boulders-New-Zealand.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-11-27T01:52:26.346Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    }
+  ]
 }

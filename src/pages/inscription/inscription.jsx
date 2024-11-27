@@ -4,11 +4,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
 
 export default function inscription() {
+  // Utilisation de useNavigate pour la navigation
+  const navigate = useNavigate();
   // Utilisation de react-hook-form pour gérer le formulaire
   const {
     // Fonction handleSubmit pour gérer la soumission du formulaire
@@ -23,17 +26,26 @@ export default function inscription() {
     if (data.motDePasse !== data.confirmerMotDePasse) {
       toast.error("Les mots de passe ne correspondent pas");
     } else {
-      // Utilisation de axios pour envoyer les données du formulaire à l'API
       axios
-        .post("http://localhost:3000/utilisateur", data)
+        .get(`http://localhost:3000/utilisateur?email=${data.email}`)
         .then((res) => {
-          console.log(res);
+          if (res.data.length > 0) {
+            toast.error("Un compte existe déjà avec cet email");
+          } else {
+            // Utilisation de axios pour envoyer les données du formulaire à l'API
+            axios
+              .post("http://localhost:3000/utilisateur", data)
+              .then((res) => {
+                console.log(res);
 
-          toast.success("Inscription réussie");
-        })
-        .catch((err) => {
-          console.log(err);
-          toast.error("Erreur lors de l'inscription");
+                toast.success("Inscription réussie");
+                navigate("/connexion");
+              })
+              .catch((err) => {
+                console.log(err);
+                toast.error("Erreur lors de l'inscription");
+              });
+          }
         });
     }
   };
@@ -76,7 +88,9 @@ export default function inscription() {
               label="entrer ici votre nom"
               variant="outlined"
               fullWidth
+              // Propriétés de register pour enregistrer le champ
               {...register("nomUtilisateur", {
+                // Validation du champ nomUtilisateur
                 required: "Ce champ est obligatoire",
                 maxLength: {
                   value: 20,
