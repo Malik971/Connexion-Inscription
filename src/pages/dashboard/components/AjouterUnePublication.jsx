@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import React from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function AjouterUnePublication() {
-    const user = JSON.parse(localStorage.getItem("utilisateur"));
+  const user = JSON.parse(localStorage.getItem("utilisateur"));
   const {
     // Fonction handleSubmit pour gérer la soumission du formulaire
     handleSubmit,
@@ -18,24 +19,32 @@ export default function AjouterUnePublication() {
     // Objet errors pour gérer les erreurs de validation
     formState: { errors },
   } = useForm();
+
+  const useQuery = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (pub) => {
+      return axios.post("http://localhost:3000/publication", pub);
+    },
+    onError: (error) => {
+      toast.error("Erreur lors de la publication");
+    },
+    onSuccess: () => {
+      reset();
+      useQuery.invalidateQueries("publications");
+      toast.success("Publication ajoutée avec succès");
+    }
+  });
+
   const onSubmit = (data) => {
-        const publication = {
-            ...data,
-            utilisateurId: user.id,
-            datePublication: new Date().toISOString(),
-            likePublication: 0,
-            auteur: user.nomUtilisateur,
-        }
-        
-        axios.post("http://localhost:3000/publication", publication).then((res) => {
-            console.log(res);
-            toast.success("Publication ajoutée");
-            reset();
-        })
-        .catch((err) => {
-            console.log(err);
-            toast.error("Erreur lors de l'ajout de la publication");
-        });
+    const publication = {
+      ...data,
+      utilisateurId: user.id,
+      datePublication: new Date().toISOString(),
+      likePublication: 0,
+      auteur: user.nomUtilisateur,
+    };
+    mutation.mutate(publication);
   };
 
   return (
@@ -81,7 +90,7 @@ export default function AjouterUnePublication() {
               required: "Veuillez saisir une image",
               pattern: {
                 // L'url doit commencer par http ou https et se terminer par .png, .jpg, .jpeg ou .gif
-                value: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/i,
+                // value: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/i,
                 message: "Veuillez saisir une url valide",
               },
             })}
@@ -89,10 +98,9 @@ export default function AjouterUnePublication() {
           <Button
             // Propriétés variante, sx, type et endIcon de Button
             variant="contained"
-            sx={{ 
-                marginTop: 1,
-                marginBottom: 4,
-            
+            sx={{
+              marginTop: 1,
+              marginBottom: 4,
             }}
             // type submit pour soumettre le formulaire
             type="submit"

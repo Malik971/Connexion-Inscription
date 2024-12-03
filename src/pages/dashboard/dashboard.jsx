@@ -7,39 +7,45 @@ import axios from "axios";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
 
 export default function dashboard() {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("utilisateur")) {
-      Navigate("/connexion");
+      navigate("/connexion");
     }
   });
 
+  const queryClient = useQueryClient();
+  const {
+    data: publications,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["publications"],
+    queryFn: () =>
+      axios.get("http://localhost:3000/publication").then((res) => res.data),
+    onerror: (error) => console.log(error),
+  });
 
-    const queryClient = useQueryClient();
-    const {data:publication, error, isLoading} = useQuery({
-      queryKey: ["publications"],
-      queryFn: () =>
-        axios
-          .get("http://localhost:3000/publication").then((res) => res.data),
-      onerror: (error) => console.log(error),
-    });
+  let pubTrier = publications?.sort((a, b) => {
+    return new Date(b.datePublication) - new Date(a.datePublication);
+  })
 
   if (isLoading) {
-    return <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      height: "100vh",
-      width: "100vw",
-    }}
-    >
-      <h1>
-        <center>
-          Chargement...
-        </center>
-      </h1>
-    </div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          width: "100vw",
+        }}
+      >
+        <h1>
+          <center>Chargement...</center>
+        </h1>
+      </div>
+    );
   }
 
   return (
@@ -47,7 +53,7 @@ export default function dashboard() {
       <Navbar />
       <AjouterUnePublication />
       <Box width={"80%"} margin={"auto"}>
-        {publication.map((publication) => (
+        {publications && pubTrier.map((publication) => (
           <Box
             width={"100%"}
             margin={"auto"}

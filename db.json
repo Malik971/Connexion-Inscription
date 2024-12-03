@@ -17,12 +17,6 @@
   ],
   "publication": [
     {
-      "id": "3016",
-      "textePublication": "Combien d’œufs peut-on manger par jour ? La réponse d’un nutritionniste",
-      "imagePublication": "https://i.pinimg.com/736x/bd/2d/bf/bd2dbf11db25b3277cefe7936e0509c1.jpg",
-      "utilisateurId": "5927"
-    },
-    {
       "id": "ce08",
       "textePublication": "date réels !",
       "imagePublication": "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/07/Raw-vs-JPEG-Photographer-at-Sunset.jpg",
@@ -37,6 +31,42 @@
       "imagePublication": "https://photographylife.com/wp-content/uploads/2018/11/Moeraki-Boulders-New-Zealand.jpg",
       "utilisateurId": "5927",
       "datePublication": "2024-11-27T01:52:26.346Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "c716",
+      "textePublication": "lalalalaaa",
+      "imagePublication": "https://photographylife.com/wp-content/uploads/2018/11/Moeraki-Boulders-New-Zealand.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T14:52:53.284Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "3fff",
+      "textePublication": "publication de mutation",
+      "imagePublication": "https://kinsta.com/wp-content/uploads/2020/08/tiger-jpg.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T21:57:58.163Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "ede5",
+      "textePublication": "Le plus beau des renard ! WOW",
+      "imagePublication": "https://i.pinimg.com/736x/bd/2d/bf/bd2dbf11db25b3277cefe7936e0509c1.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T22:04:15.866Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "be2a",
+      "textePublication": "un beau oiseau !!",
+      "imagePublication": "https://tse2.mm.bing.net/th/id/OIP.ibQPxsq-ndmDT6XnuR9TBwHaFj?rs=1&pid=ImgDetMain",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T22:13:39.710Z",
       "likePublication": 0,
       "auteur": "Malik"
     }
