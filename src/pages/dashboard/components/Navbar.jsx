@@ -36,7 +36,7 @@ function Navbar() {
   };
 
   // Déconnexion et redirection
-  const handleLogout = () => {
+  const deconnexion = () => {
     localStorage.removeItem("utilisateur");
     window.location.replace("/connexion");
   };
@@ -166,7 +166,7 @@ function Navbar() {
                   key={setting}
                   onClick={() => {
                     handleCloseUserMenu();
-                    if (setting === "Déconnexion") handleLogout();
+                    if (setting === "Déconnexion") deconnexion();
                   }}
                 >
                   <Typography sx={{ textAlign: "center" }}>
