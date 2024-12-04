@@ -1,4 +1,12 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -49,6 +57,10 @@ export default function inscription() {
         });
     }
   };
+
+  // Détection de la taille de l'écran
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Pour les écrans <600px
   return (
     // Stack pour centrer le formulaire
     <Stack
@@ -57,10 +69,11 @@ export default function inscription() {
       width={"100%"}
       height={"100vh"}
       bgcolor={"#f5f5f5"}
+      padding={isMobile ? 2 : 0} // Réduction du padding sur mobile
     >
       {/* Box pour contenir le formulaire */}
       <Box
-        width={500}
+        width={isMobile ? "90%" : 500} // Largeur ajustée pour mobile
         sx={{
           bgcolor: "white",
           borderRadius: 2,
@@ -174,22 +187,31 @@ export default function inscription() {
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}
-          <Button
-            // Propriétés variante, sx, type et endIcon de Button
-            variant="contained"
-            sx={{ marginTop: 2 }}
-            // type submit pour soumettre le formulaire
-            type="submit"
-            endIcon={<SendIcon />}
-          >
-            Inscription
-          </Button>
-          <Typography
-            sx={{
-              textAlign: "center",
-              marginTop: 2
-            }}
-          >déjà inscrit ?<Link to="/connexion">connexion</Link></Typography>
+          <Stack>
+            <Button
+              // Propriétés variante, sx, type et endIcon de Button
+              variant="contained"
+              sx={{
+                marginTop: 2,
+                padding: isMobile ? 1 : 2, // Bouton plus petit sur mobile
+                fontSize: isMobile ? "0.8rem" : "1rem",
+              }}
+              // type submit pour soumettre le formulaire
+              type="submit"
+              endIcon={<SendIcon />}
+            >
+              Inscription
+            </Button>
+            <Typography
+              sx={{
+                textAlign: "center",
+                marginTop: 2,
+                fontSize: isMobile ? "0.9rem" : "1rem", // Taille de texte ajustée pour les mobiles
+              }}
+            >
+              déjà inscrit ?<Link to="/connexion">connexion</Link>
+            </Typography>
+          </Stack>
         </form>
       </Box>
     </Stack>

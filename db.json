@@ -20,6 +20,13 @@
       "email": "toutfeu@gmail.com",
       "motDePasse": "Malik971",
       "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "57da",
+      "nomUtilisateur": "chaimae",
+      "email": "chaimae@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
     }
   ],
   "publication": [
@@ -67,6 +74,15 @@
       "datePublication": "2024-12-04T01:01:44.604Z",
       "likePublication": 0,
       "auteur": "DieuDuFeu Waaa"
+    },
+    {
+      "id": "08b6",
+      "textePublication": "Je suis chaimae et j'aime les chats TROP BEAUUUUU !",
+      "imagePublication": "https://tse1.mm.bing.net/th/id/OIP.Lg6bx-pNqkZP7yuYpOdqhwHaFj?rs=1&pid=ImgDetMain",
+      "utilisateurId": "57da",
+      "datePublication": "2024-12-04T14:13:29.903Z",
+      "likePublication": 0,
+      "auteur": "chaimae"
     }
   ]
 }

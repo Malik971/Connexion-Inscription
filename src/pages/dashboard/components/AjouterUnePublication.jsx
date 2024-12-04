@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from "@mui/material";
+import { Button, Stack, TextField, Typography, useTheme, useMediaQuery } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useForm } from "react-hook-form";
 
@@ -47,14 +47,39 @@ export default function AjouterUnePublication() {
     mutation.mutate(publication);
   };
 
+   // Détection de la taille de l'écran pour rendre l'interface responsive
+   const theme = useTheme();
+   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <Stack width={"80%"} margin={"auto"}>
-      <h1>Ajouter une publication</h1>
-      <form
-        style={{
-          marginTop: 4,
+    <Stack width={isMobile ? "90%" : "80%"} // Largeur ajustée pour mobile
+    margin="auto"
+      padding={isMobile ? 2 : 4} // Padding réduit pour les petits écrans
+      sx={{
+        marginTop: "50px", // Ajout d'un espace pour éviter le chevauchement avec la navbar
+      }}
+      >
+      <Typography
+        variant="h6"
+        sx={{
+          textAlign: "center",
+          marginBottom: 2,
+          fontSize: isMobile ? "1.2rem" : "1.5rem", // Texte plus petit sur mobile
         }}
-        // Propriétés onSubmit et handleSubmit de la balise form
+      >Ajouter une publication</Typography>
+      <Typography
+        sx={{
+          textAlign: "justify",
+          fontSize: isMobile ? "0.9rem" : "1rem", // Explication adaptée pour les petits écrans
+          marginBottom: 3,
+        }}
+      >
+        Bienvenue sur la section d'ajout de publication. Ici, vous pouvez créer 
+        votre propre publication en entrant un texte et une URL d'image. 
+        Votre publication sera visible par tous les utilisateurs. Vous pouvez 
+        également explorer les publications des autres pour interagir avec leur contenu.
+      </Typography>
+      <form
         onSubmit={handleSubmit(onSubmit)}
       >
         <Stack gap={2}>
@@ -78,6 +103,8 @@ export default function AjouterUnePublication() {
                 message: "Le texte doit contenir au plus 1000 caractères",
               },
             })}
+            error={!!errors.textePublication}
+            helperText={errors.textePublication ? errors.textePublication.message : ""}
           />
           <TextField
             id="titre"
@@ -87,20 +114,22 @@ export default function AjouterUnePublication() {
             size="small"
             type="text"
             {...register("imagePublication", {
-              required: "Veuillez saisir une image",
+              required: "Veuillez saisir une image au format .png, .jpg, .jpeg ou .gif",
               pattern: {
-                // L'url doit commencer par http ou https et se terminer par .png, .jpg, .jpeg ou .gif
-                // value: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/i,
-                message: "Veuillez saisir une url valide",
+                value: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/i,
+                message: "Veuillez saisir une URL au format .png, .jpg, .jpeg ou .gif",
               },
             })}
+            error={!!errors.imagePublication}
+            helperText={errors.imagePublication ? errors.imagePublication.message : "Extension .png, .jpg, .jpeg ou .gif obligatoire"}
           />
           <Button
             // Propriétés variante, sx, type et endIcon de Button
             variant="contained"
             sx={{
               marginTop: 1,
-              marginBottom: 4,
+              padding: isMobile ? 1 : 2, // Taille du bouton adaptée
+              fontSize: isMobile ? "0.8rem" : "1rem",
             }}
             // type submit pour soumettre le formulaire
             type="submit"

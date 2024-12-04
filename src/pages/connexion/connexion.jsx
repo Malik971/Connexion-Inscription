@@ -1,4 +1,12 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -17,7 +25,7 @@ export default function Connexion() {
     if (localStorage.getItem("utilisateur")) {
       navigate("/");
     }
-    })
+  });
   // Utilisation de react-hook-form pour gérer le formulaire
   const {
     // Fonction handleSubmit pour gérer la soumission du formulaire
@@ -30,7 +38,9 @@ export default function Connexion() {
   // Fonction onSubmit pour gérer la soumission du formulaire
   const onSubmit = (data) => {
     axios
-      .get(`http://localhost:3000/utilisateur?email=${data.email}&motDePasse=${data.motDePasse}`)
+      .get(
+        `http://localhost:3000/utilisateur?email=${data.email}&motDePasse=${data.motDePasse}`
+      )
       .then((res) => {
         if (res.data.length > 0) {
           // localStorage.setItem pour stocker l'utilisateur dans le localStorage
@@ -45,6 +55,11 @@ export default function Connexion() {
         }
       });
   };
+
+  // Détection de la taille de l'écran
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Pour les écrans <600px
+
   return (
     // Stack pour centrer le formulaire
     <Stack
@@ -53,10 +68,11 @@ export default function Connexion() {
       width={"100%"}
       height={"100vh"}
       bgcolor={"#f5f5f5"}
+      padding={isMobile ? 2 : 0} // Réduction du padding sur mobile
     >
       {/* Box pour contenir le formulaire */}
       <Box
-        width={500}
+        width={isMobile ? "90%" : 500} // Largeur ajustée pour mobile
         sx={{
           bgcolor: "white",
           borderRadius: 2,
@@ -91,8 +107,13 @@ export default function Connexion() {
                 // elle vérifie si l'email est de la forme
                 // email@domaine
                 // où domaine est de la forme domaine.com
-                pattern: "/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/",
+                pattern: {
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: "Email invalide",
+                },
               })}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email.message : ""}
             />
             <TextField
               id="outlined-basic"
@@ -124,28 +145,32 @@ export default function Connexion() {
                 },
               })}
             />
-            
           </Stack>
           {/* Button pour soumettre le formulaire */}
           <Stack>
-          <Button
-            // Propriétés variante, sx, type et endIcon de Button
-            variant="contained"
-            sx={{ 
-              marginTop: 2
-            }}
-            // type submit pour soumettre le formulaire
-            type="submit"
-            endIcon={<SendIcon />}
-          >
-            Connexion
-          </Button>
-          <Typography
-            sx={{
-              textAlign: "center",
-              marginTop: 2
-            }}
-          >Pas encore de compte ?<Link to="/inscription">Inscription</Link></Typography>
+            <Button
+              // Propriétés variante, sx, type et endIcon de Button
+              variant="contained"
+              sx={{
+                marginTop: 2,
+                padding: isMobile ? 1 : 2, // Bouton plus petit sur mobile
+                fontSize: isMobile ? "0.8rem" : "1rem",
+              }}
+              // type submit pour soumettre le formulaire
+              type="submit"
+              endIcon={<SendIcon />}
+            >
+              Connexion
+            </Button>
+            <Typography
+              sx={{
+                textAlign: "center",
+                marginTop: 2,
+                fontSize: isMobile ? "0.9rem" : "1rem", // Taille de texte ajustée pour les mobiles
+              }}
+            >
+              Pas encore de compte ?<Link to="/inscription">Inscription</Link>
+            </Typography>
           </Stack>
         </form>
       </Box>
