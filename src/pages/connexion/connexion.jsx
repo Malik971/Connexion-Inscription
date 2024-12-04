@@ -109,7 +109,7 @@ export default function Connexion() {
                 // où domaine est de la forme domaine.com
                 pattern: {
                   value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                  message: "Email invalide",
+                  message: "email de la forme email@domaine.com",
                 },
               })}
               error={!!errors.email}
@@ -144,6 +144,8 @@ export default function Connexion() {
                     "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre",
                 },
               })}
+              error={!!errors.motDePasse}
+              helperText={errors.motDePasse ? errors.email.message : ""}
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}

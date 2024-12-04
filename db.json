@@ -27,6 +27,20 @@
       "email": "chaimae@gmail.com",
       "motDePasse": "Malik971",
       "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "93cd",
+      "nomUtilisateur": "user",
+      "email": "user@user",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "1ba1",
+      "nomUtilisateur": "user@user",
+      "email": "user@user.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
     }
   ],
   "publication": [

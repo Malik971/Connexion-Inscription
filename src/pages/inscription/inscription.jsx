@@ -128,8 +128,13 @@ export default function inscription() {
                 // elle vérifie si l'email est de la forme
                 // email@domaine
                 // où domaine est de la forme domaine.com
-                pattern: "/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/",
+                pattern: {
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                  message: "email de la forme email@domaine.com",
+                },
               })}
+              error={!!errors.email}
+              helperText={errors.email ? errors.email.message : ""}
             />
             <TextField
               id="outlined-basic"
@@ -160,6 +165,8 @@ export default function inscription() {
                     "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre",
                 },
               })}
+              error={!!errors.motDePasse}
+              helperText={errors.motDePasse ? errors.email.message : ""}
             />
             <TextField
               id="outlined-basic"
@@ -179,11 +186,13 @@ export default function inscription() {
                     pattern: {
                       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
                       message:
-                        "Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule et un chiffre",
+                        "ça doit être le même mot de passe que le précédent",
                     },
                   },
                 },
               })}
+              error={!!errors.confirmerMotDePasse}
+              helperText={errors.confirmerMotDePasse ? errors.email.message : ""}
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}
