@@ -5,6 +5,7 @@ import { Avatar, Box, Stack, Typography } from "@mui/material";
 import AjouterUnePublication from "./components/AjouterUnePublication";
 import axios from "axios";
 import { useQueryClient, useQuery } from "@tanstack/react-query";
+import CartPub from "./components/CartPub";
 
 export default function dashboard() {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ export default function dashboard() {
     }
   });
 
-  const queryClient = useQueryClient();
+  
   const {
     data: publications,
     error,
@@ -52,31 +53,9 @@ export default function dashboard() {
     <Box>
       <Navbar />
       <AjouterUnePublication />
-      <Box width={"80%"} margin={"auto"}>
+      <Box width={"80%"} margin={"auto"} marginTop={2}>
         {publications && pubTrier.map((publication) => (
-          <Box
-            width={"100%"}
-            margin={"auto"}
-            padding={"10px"}
-            bgcolor={"#f5f5f5"}
-            borderRadius={4}
-          >
-            <Stack direction={"row"} alignItems={"center"} spacing={2}>
-              <Avatar src={publication.utilisateur} />
-              <Typography>{publication.auteur}</Typography>
-            </Stack>
-            <Typography>{publication.textePublication}</Typography>
-            <img
-              src={publication.imagePublication}
-              alt={publication.textePublication}
-              style={{
-                width: "100%",
-                height: "auto",
-                borderRadius: 4,
-                marginTop: 2,
-              }}
-            />
-          </Box>
+          <CartPub publication={publication} />
         ))}
       </Box>
     </Box>

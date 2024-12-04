@@ -13,6 +13,13 @@
       "email": "test2@gmail.com",
       "motDePasse": "Azer1234",
       "confirmerMotDePasse": "Azer1234"
+    },
+    {
+      "id": "fc59",
+      "nomUtilisateur": "DieuDuFeu Waaa",
+      "email": "toutfeu@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
     }
   ],
   "publication": [
@@ -53,22 +60,13 @@
       "auteur": "Malik"
     },
     {
-      "id": "ede5",
-      "textePublication": "Le plus beau des renard ! WOW",
-      "imagePublication": "https://i.pinimg.com/736x/bd/2d/bf/bd2dbf11db25b3277cefe7936e0509c1.jpg",
-      "utilisateurId": "5927",
-      "datePublication": "2024-12-03T22:04:15.866Z",
+      "id": "45b7",
+      "textePublication": "Ma publication personnel c'est moi LE FEUUU!!!",
+      "imagePublication": "https://tse4.mm.bing.net/th/id/OIP.64JjP4kqWijT4G5M6L3nVgHaE8?rs=1&pid=ImgDetMain",
+      "utilisateurId": "fc59",
+      "datePublication": "2024-12-04T01:01:44.604Z",
       "likePublication": 0,
-      "auteur": "Malik"
-    },
-    {
-      "id": "be2a",
-      "textePublication": "un beau oiseau !!",
-      "imagePublication": "https://tse2.mm.bing.net/th/id/OIP.ibQPxsq-ndmDT6XnuR9TBwHaFj?rs=1&pid=ImgDetMain",
-      "utilisateurId": "5927",
-      "datePublication": "2024-12-03T22:13:39.710Z",
-      "likePublication": 0,
-      "auteur": "Malik"
+      "auteur": "DieuDuFeu Waaa"
     }
   ]
 }

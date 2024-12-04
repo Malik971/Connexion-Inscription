@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
@@ -184,6 +184,12 @@ export default function inscription() {
           >
             Inscription
           </Button>
+          <Typography
+            sx={{
+              textAlign: "center",
+              marginTop: 2
+            }}
+          >déjà inscrit ?<Link to="/connexion">connexion</Link></Typography>
         </form>
       </Box>
     </Stack>

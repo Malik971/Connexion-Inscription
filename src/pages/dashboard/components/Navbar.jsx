@@ -35,6 +35,11 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const deconnexion = () => {
+    localStorage.removeItem('utilisateur');
+    window.location.replace('/connexion');
+  };
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -145,7 +150,12 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => {
+                  handleCloseUserMenu();
+                  if (setting === 'Deconnexion') {
+                    deconnexion();
+                  }
+                }}>
                   <Typography sx={{ textAlign: 'center' }}>{setting}</Typography>
                 </MenuItem>
               ))}
