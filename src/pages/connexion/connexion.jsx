@@ -13,6 +13,8 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { auth, provider } from "../../config/firebase-config";
+import { signInWithPopup } from "firebase/auth";
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
@@ -20,6 +22,18 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Connexion() {
   // Utilisation de useNavigate pour la navigation
   const navigate = useNavigate();
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      toast.success("Utilisateur connecté :",user); // Affichage de l'utilisateur connecté dans la console
+      localStorage.setItem("utilisateur", JSON.stringify(user));
+      navigate("/");
+    } catch (error) {
+      toast.error("Erreur de connexion", error);
+    }
+  };
   // Utilisation de useEffect pour vérifier si l'utilisateur est déjà connecté
   useEffect(() => {
     if (localStorage.getItem("utilisateur")) {
@@ -145,7 +159,7 @@ export default function Connexion() {
                 },
               })}
               error={!!errors.motDePasse}
-              helperText={errors.motDePasse ? errors.email.message : ""}
+              helperText={errors.motDePasse ? errors.motDePasse.message : ""}
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}
@@ -173,6 +187,7 @@ export default function Connexion() {
             >
               Pas encore de compte ?<Link to="/inscription">Inscription</Link>
             </Typography>
+            <Button onClick={handleGoogleLogin}>Se connecter avec Google</Button>
           </Stack>
         </form>
       </Box>

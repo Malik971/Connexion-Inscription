@@ -166,7 +166,7 @@ export default function inscription() {
                 },
               })}
               error={!!errors.motDePasse}
-              helperText={errors.motDePasse ? errors.email.message : ""}
+              helperText={errors.motDePasse ? errors.motDePasse.message : ""}
             />
             <TextField
               id="outlined-basic"
@@ -192,7 +192,7 @@ export default function inscription() {
                 },
               })}
               error={!!errors.confirmerMotDePasse}
-              helperText={errors.confirmerMotDePasse ? errors.email.message : ""}
+              helperText={errors.confirmerMotDePasse ? errors.confirmerMotDePasse.message : ""}
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}
