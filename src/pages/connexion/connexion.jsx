@@ -15,6 +15,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider } from "../../config/firebase-config";
 import { signInWithPopup } from "firebase/auth";
+import { GoogleIcon } from "../dashboard/components/CustomIcons";
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
@@ -23,15 +24,39 @@ export default function Connexion() {
   // Utilisation de useNavigate pour la navigation
   const navigate = useNavigate();
 
+  // Fonction de connexion via Google
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      toast.success("Utilisateur connecté :",user); // Affichage de l'utilisateur connecté dans la console
-      localStorage.setItem("utilisateur", JSON.stringify(user));
+
+      // Vérifiez si l'utilisateur existe déjà dans `db.json`
+      const { data: existingUser } = await axios.get(
+        `http://localhost:3000/utilisateur?email=${user.email}`
+      );
+
+      if (existingUser.length === 0) {
+        // Si l'utilisateur Google n'existe pas encore, ajoutez-le à la base de données
+        const newUser = {
+          id: user.uid,
+          nom: user.displayName,
+          email: user.email,
+          image: user.photoURL,
+          google: true, // Indique qu'il s'agit d'un utilisateur Google
+        };
+        await axios.post("http://localhost:3000/utilisateur", newUser);
+        localStorage.setItem("utilisateur", JSON.stringify(newUser));
+        toast.success("Bienvenue, utilisateur Google ajouté !");
+      } else {
+        // Si l'utilisateur existe, utilisez ses données
+        localStorage.setItem("utilisateur", JSON.stringify(existingUser[0]));
+        toast.success("Connexion réussie avec Google !");
+      }
+
       navigate("/");
     } catch (error) {
-      toast.error("Erreur de connexion", error);
+      console.error(error);
+      toast.error("Erreur lors de la connexion avec Google.");
     }
   };
   // Utilisation de useEffect pour vérifier si l'utilisateur est déjà connecté
@@ -39,7 +64,7 @@ export default function Connexion() {
     if (localStorage.getItem("utilisateur")) {
       navigate("/");
     }
-  });
+  }, [navigate]);
   // Utilisation de react-hook-form pour gérer le formulaire
   const {
     // Fonction handleSubmit pour gérer la soumission du formulaire
@@ -182,12 +207,20 @@ export default function Connexion() {
               sx={{
                 textAlign: "center",
                 marginTop: 2,
+                marginBottom: 2,
                 fontSize: isMobile ? "0.9rem" : "1rem", // Taille de texte ajustée pour les mobiles
               }}
             >
-              Pas encore de compte ?<Link to="/inscription">Inscription</Link>
+              Pas encore de compte ? <Link to="/inscription">Inscription</Link>
             </Typography>
-            <Button onClick={handleGoogleLogin}>Se connecter avec Google</Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={handleGoogleLogin}
+              startIcon={<GoogleIcon />}
+            >
+              Se connecter avec Google
+            </Button>
           </Stack>
         </form>
       </Box>

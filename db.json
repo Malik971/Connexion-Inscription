@@ -41,6 +41,13 @@
       "email": "user@user.com",
       "motDePasse": "Malik971",
       "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "3yOF0bmcxCd4WE0mlVckcTQCNyF2",
+      "nom": "Malik dev",
+      "email": "malik97un@gmail.com",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0O56MeabEXTYR0P4eX9IjKpJe0nHH2RQGTRViFMI_HyYjtg=s96-c",
+      "google": true
     }
   ],
   "publication": [
@@ -104,6 +111,14 @@
       "imagePublication": "https://cdn.pixabay.com/photo/2017/10/20/22/32/businessman-2873115_1280.png",
       "datePublication": "2024-12-05T22:03:39.780Z",
       "likePublication": 0
+    },
+    {
+      "id": "8cde",
+      "textePublication": "Tuto publication par une connexion Google",
+      "imagePublication": "https://wallpaperaccess.com/full/359112.jpg",
+      "utilisateurId": "3yOF0bmcxCd4WE0mlVckcTQCNyF2",
+      "datePublication": "2024-12-10T18:15:15.581Z",
+      "likePublication": 19
     }
   ]
 }

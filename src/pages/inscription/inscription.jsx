@@ -13,6 +13,12 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { auth, provider } from "../../config/firebase-config";
+import { signInWithPopup } from "firebase/auth";
+
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
@@ -20,6 +26,18 @@ import { Link, useNavigate } from "react-router-dom";
 export default function inscription() {
   // Utilisation de useNavigate pour la navigation
   const navigate = useNavigate();
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      toast.success("Utilisateur connecté :",user); // Affichage de l'utilisateur connecté dans la console
+      localStorage.setItem("utilisateur", JSON.stringify(user));
+      navigate("/");
+    } catch (error) {
+      toast.error("Erreur de connexion", error);
+    }
+  };
   // Utilisation de react-hook-form pour gérer le formulaire
   const {
     // Fonction handleSubmit pour gérer la soumission du formulaire
@@ -115,6 +133,9 @@ export default function inscription() {
                 },
               })}
             />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DatePicker />
+    </LocalizationProvider>
             <TextField
               id="outlined-basic"
               label="entrer ici votre email"
@@ -215,11 +236,13 @@ export default function inscription() {
               sx={{
                 textAlign: "center",
                 marginTop: 2,
+                marginBottom: 2,
                 fontSize: isMobile ? "0.9rem" : "1rem", // Taille de texte ajustée pour les mobiles
               }}
             >
-              déjà inscrit ?<Link to="/connexion">connexion</Link>
+              déjà inscrit ? <Link to="/connexion">connexion</Link> où
             </Typography>
+            <Button onClick={handleGoogleLogin}>Se connecter avec Google</Button>
           </Stack>
         </form>
       </Box>
