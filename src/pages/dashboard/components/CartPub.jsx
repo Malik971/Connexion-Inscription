@@ -19,9 +19,30 @@ export default function CartPub({ publication }) {
 
   // Fonction pour aimer une publication
   const aimerPublication = async () => {
-    const updatedPublication = { ...publication, likePublication: likes + 1 };
-    await axios.put(`http://localhost:3000/publication/${publication.id}`, updatedPublication);
-    setLikes((prevLikes) => prevLikes + 1);
+    if (publication.likedBy.includes(user.id)) {
+      alert("Vous avez déjà aimé cette publication.");
+      return;
+    }
+
+    // Mettre à jour le like et ajouter l'utilisateur dans likedBy
+    const updatedPublication = {
+      ...publication,
+      likePublication: likes + 1,
+      likedBy: [...publication.likedBy, user.id], // Ajouter l'ID de l'utilisateur
+    };
+
+    try {
+      await axios.put(
+        `http://localhost:3000/publication/${publication.id}`,
+        updatedPublication
+      );
+  
+      // Mettre à jour l'état local
+      setLikes((prevLikes) => prevLikes + 1);
+      publication.likedBy.push(user.id); // Mise à jour locale de likedBy
+    } catch (error) {
+      console.error("Erreur lors du like :", error);
+    }
   };
 
   // Fonction pour partager une publication
