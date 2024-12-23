@@ -30,26 +30,24 @@ export default function Connexion() {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // Vérifiez si l'utilisateur existe déjà dans `db.json`
-      const { data: existingUser } = await axios.get(
-        `http://localhost:3000/utilisateur?email=${user.email}`
-      );
+      // Vérifiez si l'utilisateur existe déjà dans Firestore
+      const userDoc = await doc(db, "utilisateurs", user.uid);
+      const userSnapshot = await getDoc(userDoc);
 
-      if (existingUser.length === 0) {
+      if (!userSnapshot.exists()) {
         // Si l'utilisateur Google n'existe pas encore, ajoutez-le à la base de données
         const newUser = {
-          id: user.uid,
           nom: user.displayName,
           email: user.email,
           image: user.photoURL,
           google: true, // Indique qu'il s'agit d'un utilisateur Google
         };
-        await axios.post("http://localhost:3000/utilisateur", newUser);
+        await setDoc(userDoc, newUser);
         localStorage.setItem("utilisateur", JSON.stringify(newUser));
         toast.success("Bienvenue, utilisateur Google ajouté !");
       } else {
         // Si l'utilisateur existe, utilisez ses données
-        localStorage.setItem("utilisateur", JSON.stringify(existingUser[0]));
+        localStorage.setItem("utilisateur", JSON.stringify(userSnapshot.data()));
         toast.success("Connexion réussie avec Google !");
       }
 
@@ -75,32 +73,34 @@ export default function Connexion() {
     // Objet errors pour gérer les erreurs de validation
     formState: { errors },
   } = useForm();
-  // Fonction onSubmit pour gérer la soumission du formulaire
-  const onSubmit = (data) => {
-    axios
-      .get(
-        `http://localhost:3000/utilisateur?email=${data.email}&motDePasse=${data.motDePasse}`
-      )
-      .then((res) => {
-        if (res.data.length > 0) {
-          // localStorage.setItem pour stocker l'utilisateur dans le localStorage
-          // JSON.stringify pour convertir l'objet en chaîne de caractères
-          // res.data[0] pour récupérer le premier utilisateur de la liste
-          // navigate pour naviguer vers la page d'accueil
-          const user = res.data[0];
-          if (user.motDePasse === data.motDePasse) {
-            localStorage.setItem("utilisateur", JSON.stringify(user));
-            navigate("/");
-            toast.success("Connexion réussie");
-          } else {
-            toast.error("Email ou mot de passe incorrect");
-          }
-        } else {
-          toast.error("Email non trouvé");
-        }
-      });
-  };
+  
+  // Fonction de connexion avec email et mot de passe
+  const onSubmit = async (data) => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.motDePasse
+      );
+      const user = userCredential.user;
 
+      // Récupérez les informations utilisateur depuis Firestore
+      const userDoc = doc(db, "utilisateurs", user.uid);
+      const userSnapshot = await getDoc(userDoc);
+
+      if (userSnapshot.exists()) {
+        localStorage.setItem("utilisateur", JSON.stringify(userSnapshot.data()));
+        navigate("/");
+        toast.success("Connexion réussie");
+      } else {
+        toast.error("Utilisateur non trouvé dans Firestore");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Erreur lors de la connexion : Email ou mot de passe incorrect");
+    }
+  };
+  
   // Détection de la taille de l'écran
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Pour les écrans <600px
