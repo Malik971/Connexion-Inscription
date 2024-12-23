@@ -1,4 +1,11 @@
-import { Avatar, Box, Button, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
@@ -36,7 +43,7 @@ export default function CartPub({ publication }) {
         `http://localhost:3000/publication/${publication.id}`,
         updatedPublication
       );
-  
+
       // Mettre à jour l'état local
       setLikes((prevLikes) => prevLikes + 1);
       publication.likedBy.push(user.id); // Mise à jour locale de likedBy
@@ -72,10 +79,12 @@ export default function CartPub({ publication }) {
       borderRadius={4}
       boxShadow={2}
     >
-       {/* En-tête avec avatar, auteur et icône de suppression */}
+      {/* En-tête avec avatar, auteur et icône de suppression */}
       <Stack direction={"row"} alignItems={"center"} spacing={2} mb={2}>
         <Avatar src={publication.utilisateur} />
-        <Typography variant="subtitle1" fontWeight={"bold"}>{publication.auteur}</Typography>
+        <Typography variant="subtitle1" fontWeight={"bold"}>
+          {publication.auteur}
+        </Typography>
 
         {user.id === publication.utilisateurId && (
           <IconButton
@@ -88,7 +97,9 @@ export default function CartPub({ publication }) {
       </Stack>
 
       {/* Contenu de la publication */}
-      <Typography  variant="body1" mb={2}>{publication.textePublication}</Typography>
+      <Typography variant="body1" mb={2}>
+        {publication.textePublication}
+      </Typography>
 
       {/* Image de la publication */}
       <Box
@@ -102,16 +113,16 @@ export default function CartPub({ publication }) {
           alignItems: "center",
         }}
       >
-      <img
-        src={publication.imagePublication}
-        alt={publication.textePublication}
-        style={{
-          width: "100%",
-          height: "auto",
-          borderRadius: 4,
-          marginTop: 2,
-        }}
-      />
+        <img
+          src={publication.imagePublication}
+          alt={publication.textePublication}
+          style={{
+            width: "100%",
+            height: "auto",
+            borderRadius: 4,
+            marginTop: 2,
+          }}
+        />
       </Box>
       {/* Boutons d'interaction */}
       <Stack direction={"row"} justifyContent={"space-between"} mt={2}>
@@ -133,7 +144,6 @@ export default function CartPub({ publication }) {
           Partager
         </Button>
       </Stack>
-      
     </Box>
   );
 }

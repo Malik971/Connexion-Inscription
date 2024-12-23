@@ -15,7 +15,6 @@ export default function dashboard() {
     }
   });
 
-  
   const {
     data: publications,
     error,
@@ -29,7 +28,7 @@ export default function dashboard() {
 
   let pubTrier = publications?.sort((a, b) => {
     return new Date(b.datePublication) - new Date(a.datePublication);
-  })
+  });
 
   if (isLoading) {
     return (
@@ -54,9 +53,8 @@ export default function dashboard() {
       <Navbar />
       <AjouterUnePublication />
       <Box width={"80%"} margin={"auto"} marginTop={2}>
-        {publications && pubTrier.map((publication) => (
-          <CartPub publication={publication} />
-        ))}
+        {publications &&
+          pubTrier.map((publication) => <CartPub publication={publication} />)}
       </Box>
     </Box>
   );

@@ -47,7 +47,10 @@ export default function Connexion() {
         toast.success("Bienvenue, utilisateur Google ajouté !");
       } else {
         // Si l'utilisateur existe, utilisez ses données
-        localStorage.setItem("utilisateur", JSON.stringify(userSnapshot.data()));
+        localStorage.setItem(
+          "utilisateur",
+          JSON.stringify(userSnapshot.data())
+        );
         toast.success("Connexion réussie avec Google !");
       }
 
@@ -73,7 +76,7 @@ export default function Connexion() {
     // Objet errors pour gérer les erreurs de validation
     formState: { errors },
   } = useForm();
-  
+
   // Fonction de connexion avec email et mot de passe
   const onSubmit = async (data) => {
     try {
@@ -89,7 +92,10 @@ export default function Connexion() {
       const userSnapshot = await getDoc(userDoc);
 
       if (userSnapshot.exists()) {
-        localStorage.setItem("utilisateur", JSON.stringify(userSnapshot.data()));
+        localStorage.setItem(
+          "utilisateur",
+          JSON.stringify(userSnapshot.data())
+        );
         navigate("/");
         toast.success("Connexion réussie");
       } else {
@@ -97,10 +103,12 @@ export default function Connexion() {
       }
     } catch (error) {
       console.error(error);
-      toast.error("Erreur lors de la connexion : Email ou mot de passe incorrect");
+      toast.error(
+        "Erreur lors de la connexion : Email ou mot de passe incorrect"
+      );
     }
   };
-  
+
   // Détection de la taille de l'écran
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm")); // Pour les écrans <600px

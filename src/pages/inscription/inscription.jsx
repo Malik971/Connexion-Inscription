@@ -13,13 +13,12 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { auth, provider, db } from "../../config/firebase-config";
 import { signInWithPopup } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-
 
 // Composant d'inscription qui contient un formulaire d'inscription
 // avec les champs nom, email, mot de passe et confirmation de mot de passe
@@ -32,7 +31,7 @@ export default function inscription() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
-      toast.success("Utilisateur connecté :",user); // Affichage de l'utilisateur connecté dans la console
+      toast.success("Utilisateur connecté :", user); // Affichage de l'utilisateur connecté dans la console
       localStorage.setItem("utilisateur", JSON.stringify(user));
       navigate("/");
     } catch (error) {
@@ -73,7 +72,10 @@ export default function inscription() {
                 navigate("/connexion");
               })
               .catch((err) => {
-                console.log("Erreur lors de l'ajout de l'utilisateur dans Firestore", err);
+                console.log(
+                  "Erreur lors de l'ajout de l'utilisateur dans Firestore",
+                  err
+                );
                 toast.error("Erreur lors de l'inscription");
               });
           }
@@ -139,8 +141,8 @@ export default function inscription() {
               })}
             />
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DatePicker />
-    </LocalizationProvider>
+              <DatePicker />
+            </LocalizationProvider>
             <TextField
               id="outlined-basic"
               label="entrer ici votre email"
@@ -218,7 +220,11 @@ export default function inscription() {
                 },
               })}
               error={!!errors.confirmerMotDePasse}
-              helperText={errors.confirmerMotDePasse ? errors.confirmerMotDePasse.message : ""}
+              helperText={
+                errors.confirmerMotDePasse
+                  ? errors.confirmerMotDePasse.message
+                  : ""
+              }
             />
           </Stack>
           {/* Button pour soumettre le formulaire */}
@@ -247,7 +253,9 @@ export default function inscription() {
             >
               déjà inscrit ? <Link to="/connexion">connexion</Link> où
             </Typography>
-            <Button onClick={handleGoogleLogin}>Se connecter avec Google</Button>
+            <Button onClick={handleGoogleLogin}>
+              Se connecter avec Google
+            </Button>
           </Stack>
         </form>
       </Box>

@@ -1,4 +1,11 @@
-import { Button, Stack, TextField, Typography, useTheme, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Stack,
+  TextField,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { useForm } from "react-hook-form";
 
@@ -33,7 +40,7 @@ export default function AjouterUnePublication() {
       reset();
       useQuery.invalidateQueries("publications");
       toast.success("Publication ajoutée avec succès");
-    }
+    },
   });
 
   const onSubmit = (data) => {
@@ -47,18 +54,19 @@ export default function AjouterUnePublication() {
     mutation.mutate(publication);
   };
 
-   // Détection de la taille de l'écran pour rendre l'interface responsive
-   const theme = useTheme();
-   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  // Détection de la taille de l'écran pour rendre l'interface responsive
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Stack width={isMobile ? "90%" : "80%"} // Largeur ajustée pour mobile
-    margin="auto"
+    <Stack
+      width={isMobile ? "90%" : "80%"} // Largeur ajustée pour mobile
+      margin="auto"
       padding={isMobile ? 2 : 4} // Padding réduit pour les petits écrans
       sx={{
         marginTop: "50px", // Ajout d'un espace pour éviter le chevauchement avec la navbar
       }}
-      >
+    >
       <Typography
         variant="h6"
         sx={{
@@ -66,7 +74,9 @@ export default function AjouterUnePublication() {
           marginBottom: 2,
           fontSize: isMobile ? "1.2rem" : "1.5rem", // Texte plus petit sur mobile
         }}
-      >Ajouter une publication</Typography>
+      >
+        Ajouter une publication
+      </Typography>
       <Typography
         sx={{
           textAlign: "justify",
@@ -74,14 +84,13 @@ export default function AjouterUnePublication() {
           marginBottom: 3,
         }}
       >
-        Bienvenue sur la section d'ajout de publication. Ici, vous pouvez créer 
-        votre propre publication en entrant un texte et une URL d'image. 
-        Votre publication sera visible par tous les utilisateurs. Vous pouvez 
-        également explorer les publications des autres pour interagir avec leur contenu.
+        Bienvenue sur la section d'ajout de publication. Ici, vous pouvez créer
+        votre propre publication en entrant un texte et une URL d'image. Votre
+        publication sera visible par tous les utilisateurs. Vous pouvez
+        également explorer les publications des autres pour interagir avec leur
+        contenu.
       </Typography>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Stack gap={2}>
           <TextField
             id="titre"
@@ -104,7 +113,9 @@ export default function AjouterUnePublication() {
               },
             })}
             error={!!errors.textePublication}
-            helperText={errors.textePublication ? errors.textePublication.message : ""}
+            helperText={
+              errors.textePublication ? errors.textePublication.message : ""
+            }
           />
           <TextField
             id="titre"
@@ -114,14 +125,20 @@ export default function AjouterUnePublication() {
             size="small"
             type="text"
             {...register("imagePublication", {
-              required: "Veuillez saisir une image au format .png, .jpg, .jpeg ou .gif",
+              required:
+                "Veuillez saisir une image au format .png, .jpg, .jpeg ou .gif",
               pattern: {
                 value: /^https?:\/\/.*\.(?:png|jpg|jpeg|gif)$/i,
-                message: "Veuillez saisir une URL au format .png, .jpg, .jpeg ou .gif",
+                message:
+                  "Veuillez saisir une URL au format .png, .jpg, .jpeg ou .gif",
               },
             })}
             error={!!errors.imagePublication}
-            helperText={errors.imagePublication ? errors.imagePublication.message : "Extension .png, .jpg, .jpeg ou .gif obligatoire"}
+            helperText={
+              errors.imagePublication
+                ? errors.imagePublication.message
+                : "Extension .png, .jpg, .jpeg ou .gif obligatoire"
+            }
           />
           <Button
             // Propriétés variante, sx, type et endIcon de Button
