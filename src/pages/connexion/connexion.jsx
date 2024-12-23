@@ -61,8 +61,9 @@ export default function Connexion() {
   };
   // Utilisation de useEffect pour vérifier si l'utilisateur est déjà connecté
   useEffect(() => {
-    if (localStorage.getItem("utilisateur")) {
-      navigate("/");
+    const utilisateur = localStorage.getItem("utilisateur");
+    if (utilisateur) {
+      navigate("/"); // Redirection vers la page d'accueil si un utilisateur est connecté
     }
   }, [navigate]);
   // Utilisation de react-hook-form pour gérer le formulaire
@@ -86,11 +87,16 @@ export default function Connexion() {
           // JSON.stringify pour convertir l'objet en chaîne de caractères
           // res.data[0] pour récupérer le premier utilisateur de la liste
           // navigate pour naviguer vers la page d'accueil
-          localStorage.setItem("utilisateur", JSON.stringify(res.data[0]));
-          navigate("/");
-          toast.success("Connexion réussie");
+          const user = res.data[0];
+          if (user.motDePasse === data.motDePasse) {
+            localStorage.setItem("utilisateur", JSON.stringify(user));
+            navigate("/");
+            toast.success("Connexion réussie");
+          } else {
+            toast.error("Email ou mot de passe incorrect");
+          }
         } else {
-          toast.error("Email ou mot de passe incorrect");
+          toast.error("Email non trouvé");
         }
       });
   };

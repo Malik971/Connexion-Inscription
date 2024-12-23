@@ -16,8 +16,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { auth, provider } from "../../config/firebase-config";
+import { auth, provider, db } from "../../config/firebase-config";
 import { signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 
 // Composant d'inscription qui contient un formulaire d'inscription
@@ -58,17 +59,21 @@ export default function inscription() {
           if (res.data.length > 0) {
             toast.error("Un compte existe déjà avec cet email");
           } else {
-            // Utilisation de axios pour envoyer les données du formulaire à l'API
-            axios
-              .post("http://localhost:3000/utilisateur", data)
-              .then((res) => {
-                console.log(res);
+            // Ajout dans Firestore
+            const userData = {
+              nomUtilisateur: data.nomUtilisateur,
+              email: data.email,
+              dateInscription: new Date(),
+            };
 
+            // Enregistrer l'utilisateur dans Firestore dans la collection "utilisateurs"
+            setDoc(doc(db, "utilisateurs", data.email), userData)
+              .then(() => {
                 toast.success("Inscription réussie");
                 navigate("/connexion");
               })
               .catch((err) => {
-                console.log(err);
+                console.log("Erreur lors de l'ajout de l'utilisateur dans Firestore", err);
                 toast.error("Erreur lors de l'inscription");
               });
           }
