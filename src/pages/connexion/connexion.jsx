@@ -13,7 +13,11 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, provider, db } from "../../config/firebase-config";
-import { signInWithEmailAndPassword, signInWithPopup, signInWithRedirect } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
+} from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { GoogleIcon } from "../dashboard/components/CustomIcons";
 
