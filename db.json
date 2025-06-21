@@ -1,0 +1,124 @@
+{
+  "utilisateur": [
+    {
+      "id": "5927",
+      "nomUtilisateur": "Malik",
+      "email": "test@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "dd41",
+      "nomUtilisateur": "Malik",
+      "email": "test2@gmail.com",
+      "motDePasse": "Azer1234",
+      "confirmerMotDePasse": "Azer1234"
+    },
+    {
+      "id": "fc59",
+      "nomUtilisateur": "DieuDuFeu Waaa",
+      "email": "toutfeu@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "57da",
+      "nomUtilisateur": "chaimae",
+      "email": "chaimae@gmail.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "93cd",
+      "nomUtilisateur": "user",
+      "email": "user@user",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "1ba1",
+      "nomUtilisateur": "user@user",
+      "email": "user@user.com",
+      "motDePasse": "Malik971",
+      "confirmerMotDePasse": "Malik971"
+    },
+    {
+      "id": "3yOF0bmcxCd4WE0mlVckcTQCNyF2",
+      "nom": "Malik dev",
+      "email": "malik97un@gmail.com",
+      "image": "https://lh3.googleusercontent.com/a/ACg8ocK0O56MeabEXTYR0P4eX9IjKpJe0nHH2RQGTRViFMI_HyYjtg=s96-c",
+      "google": true
+    }
+  ],
+  "publication": [
+    {
+      "id": "ce08",
+      "textePublication": "date réels !",
+      "imagePublication": "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/07/Raw-vs-JPEG-Photographer-at-Sunset.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-11-27T00:58:01.322Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "ccc3",
+      "textePublication": "Coucou la team moi je suis la fonction reset !",
+      "imagePublication": "https://photographylife.com/wp-content/uploads/2018/11/Moeraki-Boulders-New-Zealand.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-11-27T01:52:26.346Z",
+      "likePublication": 0,
+      "auteur": "Malik"
+    },
+    {
+      "id": "c716",
+      "textePublication": "lalalalaaa",
+      "imagePublication": "https://photographylife.com/wp-content/uploads/2018/11/Moeraki-Boulders-New-Zealand.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T14:52:53.284Z",
+      "likePublication": 2,
+      "auteur": "Malik"
+    },
+    {
+      "id": "3fff",
+      "textePublication": "publication de mutation",
+      "imagePublication": "https://kinsta.com/wp-content/uploads/2020/08/tiger-jpg.jpg",
+      "utilisateurId": "5927",
+      "datePublication": "2024-12-03T21:57:58.163Z",
+      "likePublication": 2,
+      "auteur": "Malik"
+    },
+    {
+      "id": "45b7",
+      "textePublication": "Ma publication personnel c'est moi LE FEUUU!!!",
+      "imagePublication": "https://tse4.mm.bing.net/th/id/OIP.64JjP4kqWijT4G5M6L3nVgHaE8?rs=1&pid=ImgDetMain",
+      "utilisateurId": "fc59",
+      "datePublication": "2024-12-04T01:01:44.604Z",
+      "likePublication": 2,
+      "auteur": "DieuDuFeu Waaa"
+    },
+    {
+      "id": "08b6",
+      "textePublication": "Je suis chaimae et j'aime les chats TROP BEAUUUUU !",
+      "imagePublication": "https://tse1.mm.bing.net/th/id/OIP.Lg6bx-pNqkZP7yuYpOdqhwHaFj?rs=1&pid=ImgDetMain",
+      "utilisateurId": "57da",
+      "datePublication": "2024-12-04T14:13:29.903Z",
+      "likePublication": 4,
+      "auteur": "chaimae"
+    },
+    {
+      "id": "4153",
+      "textePublication": "Malik développeur d'application et de site web à votre service",
+      "imagePublication": "https://cdn.pixabay.com/photo/2017/10/20/22/32/businessman-2873115_1280.png",
+      "datePublication": "2024-12-05T22:03:39.780Z",
+      "likePublication": 0
+    },
+    {
+      "id": "8cde",
+      "textePublication": "Tuto publication par une connexion Google",
+      "imagePublication": "https://wallpaperaccess.com/full/359112.jpg",
+      "utilisateurId": "3yOF0bmcxCd4WE0mlVckcTQCNyF2",
+      "datePublication": "2024-12-10T18:15:15.581Z",
+      "likePublication": 19
+    }
+  ]
+}
